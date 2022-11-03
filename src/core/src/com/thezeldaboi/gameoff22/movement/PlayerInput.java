@@ -17,6 +17,13 @@ public class PlayerInput {
             Bodies.playerBody.applyForce(200.0f, 0.0f, Bodies.playerBody.getPosition().x, Bodies.playerBody.getPosition().y, true);
         }
 
+        if (Gdx.input.isKeyPressed(Input.Keys.LEFT)) {
+            Bodies.playerBody.applyForce(-200.0f, 0.0f, Bodies.playerBody.getPosition().x, Bodies.playerBody.getPosition().y, true);
+        }
+
+        if (Gdx.input.isKeyPressed(Input.Keys.UP)) {
+            Bodies.playerBody.applyForce(0.0f, 1000.0f, Bodies.playerBody.getPosition().x, Bodies.playerBody.getPosition().y, true);
+        }
 
     }
 }

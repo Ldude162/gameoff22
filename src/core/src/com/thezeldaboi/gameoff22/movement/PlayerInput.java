@@ -13,8 +13,8 @@ public class PlayerInput {
     public static int startY;
     public static void movePlayer() {
 
-        if (Gdx.input.isKeyPressed(Input.Keys.LEFT)) {
-            Bodies.playerBody.applyForce(-1.0f, 0.0f, Bodies.playerBody.getPosition().x, Bodies.playerBody.getPosition().y, true);
+        if (Gdx.input.isKeyPressed(Input.Keys.RIGHT)) {
+            Bodies.playerBody.applyForce(200.0f, 0.0f, Bodies.playerBody.getPosition().x, Bodies.playerBody.getPosition().y, true);
         }
 
 

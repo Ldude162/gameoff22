@@ -19,7 +19,7 @@ public class Hindsight extends ApplicationAdapter {
     public ShapeRenderer shapeRenderer;
     public Texture playerImage;
     public Texture platformImage;
-    public static World world = new World(new Vector2(0,-10), true);
+    public static World world = new World(new Vector2(0,-600), true);
     public static Box2DDebugRenderer debugRenderer;
 
 
@@ -44,7 +44,7 @@ public class Hindsight extends ApplicationAdapter {
     @Override
     public void render() {
         ScreenUtils.clear(0.1f, 0.7f, 1, 1);
-
+        PlayerInput.movePlayer();
         //cameraCreator.camera.update();
 
         /*PlayerInput.movePlayer();

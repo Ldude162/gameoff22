@@ -19,7 +19,7 @@ public class Hindsight extends ApplicationAdapter {
     public ShapeRenderer shapeRenderer;
     public Texture playerImage;
     public Texture platformImage;
-    public static World world = new World(new Vector2(0,-600), true);
+    public static World world = new World(new Vector2(0,-2000), true);
     public static Box2DDebugRenderer debugRenderer;
 
 

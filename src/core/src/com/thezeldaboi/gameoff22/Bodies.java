@@ -8,7 +8,6 @@ import com.badlogic.gdx.physics.box2d.*;
 
 import static com.thezeldaboi.gameoff22.Hindsight.world;
 
-//TODO: Work on moving the platform and controls
 public class Bodies {
 
     public static BodyDef player = new BodyDef();
@@ -22,7 +21,8 @@ public class Bodies {
 
         public static void createSprites() {
 
-
+            platform.position.set(500,100);
+            player.position.set(500,200);
             player.type = BodyDef.BodyType.DynamicBody;
             platform.type = BodyDef.BodyType.KinematicBody;
 
@@ -33,7 +33,7 @@ public class Bodies {
             PolygonShape playerShape = new PolygonShape();
             PolygonShape platformShape = new PolygonShape();
             playerShape.setAsBox(42,90);
-            platformShape.setAsBox(145,25);
+            platformShape.setAsBox(73,13);
             FixtureDef playerFDef = new FixtureDef();
             FixtureDef platformFDef = new FixtureDef();
             playerFDef.shape = playerShape;
@@ -43,24 +43,16 @@ public class Bodies {
             platformBody.createFixture(platformFDef);
 
 
-
-
-
-            platform.position.set(500,300);
-            player.position.set(0,0);
-
-
-
-
-
         }
 
         public static void render(SpriteBatch batch) {
 
             float playerX = playerBody.getPosition().x-40;
             float playerY = playerBody.getPosition().y-90;
-            float platformX = platformBody.getPosition().x;
-            float platformY = platformBody.getPosition().y;
+            float platformX = platformBody.getPosition().x-73;
+            float platformY = platformBody.getPosition().y-13;
+
+
 
             playerSprite.setPosition(playerX,playerY);
             platformSprite.setPosition(platformX,platformY);

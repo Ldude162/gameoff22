@@ -17,7 +17,6 @@ import com.thezeldaboi.gameoff22.rendering.Camera;
 public class Hindsight extends ApplicationAdapter {
     public Camera cameraCreator = new Camera();
     public SpriteBatch batch;
-    public ShapeRenderer shapeRenderer;
     public Texture playerImage;
     public Texture platformImage;
     public static float PPM = 180f;
@@ -30,8 +29,6 @@ public class Hindsight extends ApplicationAdapter {
         Box2D.init();
         platformImage = new Texture(Gdx.files.internal("platform_green.png"));
         playerImage = new Texture(Gdx.files.internal("player.png"));
-        shapeRenderer = new ShapeRenderer();
-        shapeRenderer.setAutoShapeType(true);
         debugRenderer = new Box2DDebugRenderer();
         cameraCreator.createCamera();
         batch = new SpriteBatch();
@@ -49,19 +46,9 @@ public class Hindsight extends ApplicationAdapter {
     public void render() {
         ScreenUtils.clear(0.1f, 0.7f, 1, 1);
         PlayerInput.movePlayer();
-        //cameraCreator.camera.update();
-
-        /*PlayerInput.movePlayer();
-        shapeRenderer.begin();
-        shapeRenderer.rect(player.x, player.y, player.getWidth(), player.getHeight());
-        shapeRenderer.rect(platform.x, platform.y, platform.getWidth(), platform.getHeight());
-        shapeRenderer.end();
-         */
         batch.setProjectionMatrix(cameraCreator.camera.combined);
         batch.begin();
         Bodies.render(batch);
-        //batch.draw(playerImage, player.x, player.y);
-        //batch.draw(platformImage, platform.x, platform.y);
         batch.end();
 
         debugRenderer.render(world,cameraCreator.camera.combined);

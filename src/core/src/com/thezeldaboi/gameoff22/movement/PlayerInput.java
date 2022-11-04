@@ -8,11 +8,7 @@ import com.thezeldaboi.gameoff22.Hindsight;
 
 
 public class PlayerInput {
-    public static boolean isJumping = false;
-    public static boolean isFalling = false;
-    public static float time = 1.0f;
-    public static float startY;
-    private static Vector2 currentVelocity;
+
     public static void movePlayer() {
 
         if (Gdx.input.isKeyPressed(Input.Keys.RIGHT)) {
@@ -25,8 +21,7 @@ public class PlayerInput {
 
         if (Gdx.input.isKeyPressed(Input.Keys.UP)) {
             if (Hindsight.contactListener.playerColliding) {
-                isJumping = true;
-                startY = Bodies.playerBody.getPosition().y;
+
                 Bodies.playerBody.applyForce(0.0f, 130.0f, Bodies.playerBody.getPosition().x, Bodies.playerBody.getPosition().y, true);
 
             }

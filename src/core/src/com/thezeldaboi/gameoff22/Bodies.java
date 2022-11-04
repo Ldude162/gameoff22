@@ -10,19 +10,22 @@ import static com.thezeldaboi.gameoff22.Hindsight.world;
 
 public class Bodies {
 
-    public static BodyDef player = new BodyDef();
-    public static BodyDef platform = new BodyDef();
-    public static Box2DDebugRenderer debugRenderer;
+    private static BodyDef player = new BodyDef();
+    private static BodyDef platform = new BodyDef();
     public static Body playerBody;
     public static Body platformBody;
-    public static Sprite playerSprite = new Sprite(new Texture("player.png"));
-    public static Sprite platformSprite = new Sprite(new Texture("platform_green.png"));
+    public static Body platform2Body;
+    private static Sprite playerSprite = new Sprite(new Texture("player.png"));
+    private static Sprite platformSprite = new Sprite(new Texture("platform_green.png"));
+    private static Sprite platform2Sprite = new Sprite(new Texture("platform_green.png"));
+    public static Body[] platforms;
 
-
+        //TODO: Rename to createBodies
         public static void createSprites() {
 
             playerSprite.setScale(0.0056f);
             platformSprite.setScale(0.0056f);
+            platform2Sprite.setScale(0.0056f);
 
             platform.position.set(500/Hindsight.PPM,100/Hindsight.PPM);
             player.position.set(500/Hindsight.PPM,200/Hindsight.PPM);
@@ -31,6 +34,7 @@ public class Bodies {
 
             playerBody = world.createBody(player);
             platformBody = world.createBody(platform);
+            platform2Body = world.createBody(platform);
 
 
             PolygonShape playerShape = new PolygonShape();
@@ -44,9 +48,14 @@ public class Bodies {
 
             playerBody.createFixture(playerFDef);
             platformBody.createFixture(platformFDef);
+            platform2Body.createFixture(platformFDef);
 
             playerBody.setUserData("player");
             platformBody.setUserData("platform");
+            platform2Body.setUserData("platform");
+
+            platforms = {platformBody, platform2Body};
+
 
         }
 
@@ -56,14 +65,17 @@ public class Bodies {
             float playerY = playerBody.getPosition().y-90;
             float platformX = platformBody.getPosition().x-72.5f;
             float platformY = platformBody.getPosition().y-12.5f;
-
+            float platform2X = platform2Body.getPosition().x-72.5f;
+            float platform2Y = platform2Body.getPosition().y-12.5f;
 
 
             playerSprite.setPosition(playerX,playerY);
             platformSprite.setPosition(platformX,platformY);
+            platform2Sprite.setPosition(platform2X,platform2Y);
 
             playerSprite.draw(batch);
             platformSprite.draw(batch);
+            platform2SPrite.draw(batch);
 
         }
 

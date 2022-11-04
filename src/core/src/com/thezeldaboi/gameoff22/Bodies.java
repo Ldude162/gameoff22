@@ -3,7 +3,6 @@ package com.thezeldaboi.gameoff22;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
 
 import static com.thezeldaboi.gameoff22.Hindsight.world;
@@ -20,20 +19,21 @@ public class Bodies {
     private static Sprite platform2Sprite = new Sprite(new Texture("platform_green.png"));
     public static Body[] platforms;
 
-        //TODO: Rename to createBodies
-        public static void createSprites() {
+
+        public static void createBodies() {
 
             playerSprite.setScale(0.0056f);
             platformSprite.setScale(0.0056f);
             platform2Sprite.setScale(0.0056f);
 
             platform.position.set(500/Hindsight.PPM,100/Hindsight.PPM);
-            player.position.set(500/Hindsight.PPM,200/Hindsight.PPM);
+            player.position.set(500/Hindsight.PPM,230/Hindsight.PPM);
             player.type = BodyDef.BodyType.DynamicBody;
             platform.type = BodyDef.BodyType.KinematicBody;
 
             playerBody = world.createBody(player);
             platformBody = world.createBody(platform);
+            platform.position.set(200/Hindsight.PPM,150/Hindsight.PPM);
             platform2Body = world.createBody(platform);
 
 
@@ -53,8 +53,9 @@ public class Bodies {
             playerBody.setUserData("player");
             platformBody.setUserData("platform");
             platform2Body.setUserData("platform");
+            System.out.println();
 
-            platforms = {platformBody, platform2Body};
+            Body[] platforms = {platformBody, platform2Body};
 
 
         }
@@ -73,9 +74,12 @@ public class Bodies {
             platformSprite.setPosition(platformX,platformY);
             platform2Sprite.setPosition(platform2X,platform2Y);
 
-            playerSprite.draw(batch);
-            platformSprite.draw(batch);
-            platform2SPrite.draw(batch);
+            if (Hindsight.inGame) {
+                playerSprite.draw(batch);
+                platformSprite.draw(batch);
+                platform2Sprite.draw(batch);
+
+            }
 
         }
 

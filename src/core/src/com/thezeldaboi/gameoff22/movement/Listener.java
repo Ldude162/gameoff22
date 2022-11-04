@@ -1,13 +1,11 @@
 package com.thezeldaboi.gameoff22.movement;
 
-import com.badlogic.gdx.physics.box2d.Contact;
-import com.badlogic.gdx.physics.box2d.ContactImpulse;
-import com.badlogic.gdx.physics.box2d.ContactListener;
-import com.badlogic.gdx.physics.box2d.Manifold;
+import com.badlogic.gdx.physics.box2d.*;
 
 public class Listener implements ContactListener {
 
     public boolean playerColliding = false;
+    public Body collidingWith;
 
     @Override
     public void endContact(Contact contact) {
@@ -26,6 +24,8 @@ public class Listener implements ContactListener {
     @Override
     public void preSolve(Contact contact, Manifold manifold) {
         playerColliding = true;
+        Fixture fixB = contact.getFixtureB();
+        collidingWith = fixB.getBody();
     }
 
     @Override

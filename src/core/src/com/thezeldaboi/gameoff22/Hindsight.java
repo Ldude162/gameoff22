@@ -2,12 +2,7 @@ package com.thezeldaboi.gameoff22;
 
 //imports libraries and other classes
 import com.badlogic.gdx.ApplicationAdapter;
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
-import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
 import com.badlogic.gdx.utils.ScreenUtils;
@@ -18,13 +13,14 @@ import com.thezeldaboi.gameoff22.rendering.Camera;
 public class Hindsight extends ApplicationAdapter {
     private Box2DDebugRenderer debugRenderer;
     private Camera cameraCreator = new Camera();
-    //TODO: check if this batch can be private
     private SpriteBatch batch;
     public static float PPM = 180f;
     //creates world with realistic gravity
     public static World world = new World(new Vector2(0,-10), true);
     //listens for contact between the player and a platform, used to make sure you can't jump midair
     public static Listener contactListener = new Listener();
+    //TODO: Make main menu
+    public static boolean inGame = false;
 
     @Override
     public void create() {
@@ -41,7 +37,7 @@ public class Hindsight extends ApplicationAdapter {
         batch = new SpriteBatch();
 
         //creates player and platform bodies
-        Bodies.createSprites();
+        Bodies.createBodies();
 
         //starts listening for contact
         world.setContactListener(contactListener);
@@ -58,7 +54,6 @@ public class Hindsight extends ApplicationAdapter {
         //checks for user input
         PlayerInput.movePlayer();
 
-        //TODO: Check if I can put this in create()
         batch.setProjectionMatrix(cameraCreator.camera.combined);
 
         //Begins batch

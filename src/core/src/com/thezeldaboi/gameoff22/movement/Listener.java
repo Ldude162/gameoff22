@@ -25,7 +25,6 @@ public class Listener implements ContactListener {
 
     @Override
     public void preSolve(Contact contact, Manifold manifold) {
-        //System.out.println("pre collide");
         playerColliding = true;
     }
 

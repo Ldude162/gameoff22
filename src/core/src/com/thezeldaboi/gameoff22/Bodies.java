@@ -21,8 +21,11 @@ public class Bodies {
 
         public static void createSprites() {
 
-            platform.position.set(500,100);
-            player.position.set(500,200);
+            playerSprite.setScale(0.0056f);
+            platformSprite.setScale(0.0056f);
+
+            platform.position.set(500/Hindsight.PPM,100/Hindsight.PPM);
+            player.position.set(500/Hindsight.PPM,200/Hindsight.PPM);
             player.type = BodyDef.BodyType.DynamicBody;
             platform.type = BodyDef.BodyType.KinematicBody;
 
@@ -32,8 +35,8 @@ public class Bodies {
 
             PolygonShape playerShape = new PolygonShape();
             PolygonShape platformShape = new PolygonShape();
-            playerShape.setAsBox(42,90);
-            platformShape.setAsBox(73,13);
+            playerShape.setAsBox(42/Hindsight.PPM,90/Hindsight.PPM);
+            platformShape.setAsBox(73/Hindsight.PPM,13/Hindsight.PPM);
             FixtureDef playerFDef = new FixtureDef();
             FixtureDef platformFDef = new FixtureDef();
             playerFDef.shape = playerShape;
@@ -42,15 +45,17 @@ public class Bodies {
             playerBody.createFixture(playerFDef);
             platformBody.createFixture(platformFDef);
 
+            playerBody.setUserData("player");
+            platformBody.setUserData("platform");
 
         }
 
         public static void render(SpriteBatch batch) {
 
-            float playerX = playerBody.getPosition().x-40;
+            float playerX = playerBody.getPosition().x-41;
             float playerY = playerBody.getPosition().y-90;
-            float platformX = platformBody.getPosition().x-73;
-            float platformY = platformBody.getPosition().y-13;
+            float platformX = platformBody.getPosition().x-72.5f;
+            float platformY = platformBody.getPosition().y-12.5f;
 
 
 

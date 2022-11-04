@@ -10,6 +10,7 @@ import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
 import com.badlogic.gdx.utils.ScreenUtils;
+import com.thezeldaboi.gameoff22.movement.Listener;
 import com.thezeldaboi.gameoff22.movement.PlayerInput;
 import com.thezeldaboi.gameoff22.rendering.Camera;
 
@@ -19,9 +20,10 @@ public class Hindsight extends ApplicationAdapter {
     public ShapeRenderer shapeRenderer;
     public Texture playerImage;
     public Texture platformImage;
-    public static World world = new World(new Vector2(0,-2000), true);
+    public static float PPM = 180f;
+    public static World world = new World(new Vector2(0,-10), true);
     public static Box2DDebugRenderer debugRenderer;
-
+    public static Listener contactListener = new Listener();
 
     @Override
     public void create() {
@@ -34,8 +36,10 @@ public class Hindsight extends ApplicationAdapter {
         cameraCreator.createCamera();
         batch = new SpriteBatch();
 
+
         Bodies.createSprites();
 
+        world.setContactListener(contactListener);
 
     }
 

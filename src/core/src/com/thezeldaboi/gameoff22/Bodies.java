@@ -9,14 +9,15 @@ import static com.thezeldaboi.gameoff22.Hindsight.world;
 
 public class Bodies {
 
-    private static BodyDef player = new BodyDef();
-    private static BodyDef platform = new BodyDef();
+    final private static BodyDef player = new BodyDef();
+    final private static BodyDef platform = new BodyDef();
     public static Body playerBody;
     public static Body platformBody;
     public static Body platform2Body;
-    private static Sprite playerSprite = new Sprite(new Texture("player.png"));
-    private static Sprite platformSprite = new Sprite(new Texture("platform_green.png"));
-    private static Sprite platform2Sprite = new Sprite(new Texture("platform_green.png"));
+    final private static Sprite titleSprite = new Sprite(new Texture("title.png"));
+    final private static Sprite playerSprite = new Sprite(new Texture("player.png"));
+    final private static Sprite platformSprite = new Sprite(new Texture("platform_green.png"));
+    final private static Sprite platform2Sprite = new Sprite(new Texture("platform_green.png"));
     public static Body[] platforms;
 
 
@@ -25,6 +26,9 @@ public class Bodies {
             playerSprite.setScale(0.0056f);
             platformSprite.setScale(0.0056f);
             platform2Sprite.setScale(0.0056f);
+            titleSprite.setScale(0.0056f);
+
+            playerSprite.setPosition(500/Hindsight.PPM,125/Hindsight.PPM);
 
             platform.position.set(500/Hindsight.PPM,100/Hindsight.PPM);
             player.position.set(500/Hindsight.PPM,230/Hindsight.PPM);
@@ -78,6 +82,10 @@ public class Bodies {
                 playerSprite.draw(batch);
                 platformSprite.draw(batch);
                 platform2Sprite.draw(batch);
+
+            } else {
+                //TODO: Work on getting title to show up
+                titleSprite.draw(batch);
 
             }
 

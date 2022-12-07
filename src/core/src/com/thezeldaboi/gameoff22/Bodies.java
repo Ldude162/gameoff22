@@ -4,6 +4,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.physics.box2d.*;
+import com.badlogic.gdx.scenes.scene2d.ui.Button;
 
 import static com.thezeldaboi.gameoff22.Hindsight.world;
 
@@ -20,6 +21,9 @@ public class Bodies {
     final private static Sprite playerSprite = new Sprite(new Texture("player.png"));
     final private static Sprite platformSprite = new Sprite(new Texture("platform_green.png"));
     final private static Sprite platform2Sprite = new Sprite(new Texture("platform_green.png"));
+    //TODO: Make play button
+    final private static Texture startButtonTexture = new Texture("play_button.png");
+    private static Button startButton = new Button();
     public static Body[] platforms;
 
 
@@ -28,11 +32,12 @@ public class Bodies {
             playerSprite.setScale(0.0056f);
             platformSprite.setScale(0.0056f);
             platform2Sprite.setScale(0.0056f);
-            //titleSprite.setScale(0.0056f);
+            titleSprite.setScale(0.0056f);
+
 
             platform.position.set(500/Hindsight.PPM,100/Hindsight.PPM);
             player.position.set(500/Hindsight.PPM,230/Hindsight.PPM);
-            ui.position.set(500/Hindsight.PPM,220/Hindsight.PPM);
+            ui.position.set(400/Hindsight.PPM,300/Hindsight.PPM);
             ui.type = BodyDef.BodyType.StaticBody;
             player.type = BodyDef.BodyType.DynamicBody;
             platform.type = BodyDef.BodyType.KinematicBody;
@@ -49,7 +54,7 @@ public class Bodies {
             PolygonShape platformShape = new PolygonShape();
             playerShape.setAsBox(42/Hindsight.PPM,90/Hindsight.PPM);
             platformShape.setAsBox(73/Hindsight.PPM,13/Hindsight.PPM);
-            titleShape.setAsBox(50/Hindsight.PPM,50/Hindsight.PPM);
+            titleShape.setAsBox(200/Hindsight.PPM,50/Hindsight.PPM);
             FixtureDef playerFDef = new FixtureDef();
             FixtureDef platformFDef = new FixtureDef();
             FixtureDef titleFDef = new FixtureDef();
@@ -80,8 +85,8 @@ public class Bodies {
             float platformY = platformBody.getPosition().y-12.5f;
             float platform2X = platform2Body.getPosition().x-72.5f;
             float platform2Y = platform2Body.getPosition().y-12.5f;
-            float titleX = titleBody.getPosition().x;
-            float titleY = titleBody.getPosition().y;
+            float titleX = titleBody.getPosition().x-174.5f;
+            float titleY = titleBody.getPosition().y-39;
 
             playerSprite.setPosition(playerX,playerY);
             platformSprite.setPosition(platformX,platformY);
@@ -94,7 +99,6 @@ public class Bodies {
                 platform2Sprite.draw(batch);
 
             } else {
-                //TODO: Work on getting title to show up
                 titleSprite.draw(batch);
 
             }

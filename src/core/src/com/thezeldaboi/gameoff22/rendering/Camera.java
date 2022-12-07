@@ -8,7 +8,7 @@ public class Camera {
 
     public void createCamera() {
         camera = new OrthographicCamera();
-        //camera.setToOrtho(false, 20.0f, 12.0f);
+        //camera.setToOrtho(false, 20, 12);
         camera.setToOrtho(false, 800 / Hindsight.PPM, 480 / Hindsight.PPM);
     }
 

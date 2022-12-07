@@ -11,9 +11,11 @@ public class Bodies {
 
     final private static BodyDef player = new BodyDef();
     final private static BodyDef platform = new BodyDef();
+    final private static BodyDef ui = new BodyDef();
     public static Body playerBody;
     public static Body platformBody;
     public static Body platform2Body;
+    public static Body titleBody;
     final private static Sprite titleSprite = new Sprite(new Texture("title.png"));
     final private static Sprite playerSprite = new Sprite(new Texture("player.png"));
     final private static Sprite platformSprite = new Sprite(new Texture("platform_green.png"));
@@ -26,30 +28,36 @@ public class Bodies {
             playerSprite.setScale(0.0056f);
             platformSprite.setScale(0.0056f);
             platform2Sprite.setScale(0.0056f);
-            titleSprite.setScale(0.0056f);
-
-            playerSprite.setPosition(500/Hindsight.PPM,125/Hindsight.PPM);
+            //titleSprite.setScale(0.0056f);
 
             platform.position.set(500/Hindsight.PPM,100/Hindsight.PPM);
             player.position.set(500/Hindsight.PPM,230/Hindsight.PPM);
+            ui.position.set(500/Hindsight.PPM,220/Hindsight.PPM);
+            ui.type = BodyDef.BodyType.StaticBody;
             player.type = BodyDef.BodyType.DynamicBody;
             platform.type = BodyDef.BodyType.KinematicBody;
+
 
             playerBody = world.createBody(player);
             platformBody = world.createBody(platform);
             platform.position.set(200/Hindsight.PPM,150/Hindsight.PPM);
             platform2Body = world.createBody(platform);
+            titleBody = world.createBody(ui);
 
-
+            PolygonShape titleShape = new PolygonShape();
             PolygonShape playerShape = new PolygonShape();
             PolygonShape platformShape = new PolygonShape();
             playerShape.setAsBox(42/Hindsight.PPM,90/Hindsight.PPM);
             platformShape.setAsBox(73/Hindsight.PPM,13/Hindsight.PPM);
+            titleShape.setAsBox(50/Hindsight.PPM,50/Hindsight.PPM);
             FixtureDef playerFDef = new FixtureDef();
             FixtureDef platformFDef = new FixtureDef();
+            FixtureDef titleFDef = new FixtureDef();
             playerFDef.shape = playerShape;
             platformFDef.shape = platformShape;
+            titleFDef.shape = titleShape;
 
+            titleBody.createFixture(titleFDef);
             playerBody.createFixture(playerFDef);
             platformBody.createFixture(platformFDef);
             platform2Body.createFixture(platformFDef);
@@ -57,7 +65,7 @@ public class Bodies {
             playerBody.setUserData("player");
             platformBody.setUserData("platform");
             platform2Body.setUserData("platform");
-            System.out.println();
+            titleBody.setUserData("title");
 
             Body[] platforms = {platformBody, platform2Body};
 
@@ -72,11 +80,13 @@ public class Bodies {
             float platformY = platformBody.getPosition().y-12.5f;
             float platform2X = platform2Body.getPosition().x-72.5f;
             float platform2Y = platform2Body.getPosition().y-12.5f;
-
+            float titleX = titleBody.getPosition().x;
+            float titleY = titleBody.getPosition().y;
 
             playerSprite.setPosition(playerX,playerY);
             platformSprite.setPosition(platformX,platformY);
             platform2Sprite.setPosition(platform2X,platform2Y);
+            titleSprite.setPosition(titleX,titleY);
 
             if (Hindsight.inGame) {
                 playerSprite.draw(batch);

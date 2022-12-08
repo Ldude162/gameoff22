@@ -2,24 +2,27 @@ package com.thezeldaboi.gameoff22;
 
 //imports libraries and other classes
 import com.badlogic.gdx.ApplicationAdapter;
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
 import com.badlogic.gdx.utils.ScreenUtils;
-import com.thezeldaboi.gameoff22.movement.Listener;
+import com.thezeldaboi.gameoff22.movement.ContactListener;
+import com.thezeldaboi.gameoff22.movement.EventListener;
 import com.thezeldaboi.gameoff22.movement.PlayerInput;
+import com.thezeldaboi.gameoff22.rendering.Bodies;
 import com.thezeldaboi.gameoff22.rendering.Camera;
 
 public class Hindsight extends ApplicationAdapter {
-    private Box2DDebugRenderer debugRenderer;
-    private Camera cameraCreator = new Camera();
+    final private Camera cameraCreator = new Camera();
     private SpriteBatch batch;
     public static float PPM = 180f;
     //creates world with realistic gravity
     public static World world = new World(new Vector2(0,-10), true);
     //listens for contact between the player and a platform, used to make sure you can't jump midair
-    public static Listener contactListener = new Listener();
-    //TODO: Make main menu
+    public static ContactListener contactListener = new ContactListener();
+    public static MouseListener mouseListener = new MouseListener();
+    public static EventListener eventListener = new EventListener();
     public static boolean inGame = false;
 
     @Override
@@ -27,8 +30,7 @@ public class Hindsight extends ApplicationAdapter {
         //initializes world
         Box2D.init();
 
-        //creates renderer used for hitboxes, will be removed in final version
-        debugRenderer = new Box2DDebugRenderer();
+
 
         //creates the camera used to display the game
         cameraCreator.createCamera();
@@ -42,9 +44,9 @@ public class Hindsight extends ApplicationAdapter {
         //starts listening for contact
         world.setContactListener(contactListener);
 
+        Gdx.input.setInputProcessor(mouseListener);
+
     }
-
-
 
     @Override
     public void render() {
@@ -53,6 +55,8 @@ public class Hindsight extends ApplicationAdapter {
 
         //checks for user input
         PlayerInput.movePlayer();
+
+        eventListener.checkEvents();
 
         batch.setProjectionMatrix(cameraCreator.camera.combined);
 
@@ -65,11 +69,14 @@ public class Hindsight extends ApplicationAdapter {
         //ends batch
         batch.end();
 
-        //renders hitboxes
-        debugRenderer.render(world,cameraCreator.camera.combined);
+
 
         //steps world physics
         world.step(1/60f,6,2);
+
+        cameraCreator.updateCamera();
+
     }
+
 
 }

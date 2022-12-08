@@ -2,7 +2,7 @@ package com.thezeldaboi.gameoff22.movement;
 
 import com.badlogic.gdx.physics.box2d.*;
 
-public class Listener implements ContactListener {
+public class ContactListener implements com.badlogic.gdx.physics.box2d.ContactListener {
 
     public boolean playerColliding = false;
     public Body collidingWith;
